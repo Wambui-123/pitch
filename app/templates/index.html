@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hi, {{user }}!</h1>
+<h1>Welcome to One Min Pitch<h1>
+<div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+    <span class="w3-right w3-opacity">1 min</span>
+    <h4>{{ current_user.username }}</h4><br>
+    <hr class="w3-clear">
+    {% for post in posts %}
+    <h4>Pitch</h4>
+    <div class="w3-card-4">
+
+        <header class="w3-container w3-blue">
+          <h1>{{current_user.username}}</h1>
+        </header>
+        
+        <div class="w3-container">
+          <p>{{current_user.post}}</p>
+        </div>
+        
+        <footer class="w3-container w3-blue">
+            <div style="font-size: 15px">
+            <button type="button" class="votes w3-button w3-theme-d1 w3-margin-bottom"  onclick="upvote()"><i class="fa fa-thumbs-up fa-xs"><span id="votes">0</span></i></button>
+            <button type="button" class="votes w3-button w3-theme-d1 w3-margin-bottom"  onclick="downvote()"><i class="fa fa-thumbs-down fa-sm"><span id="vote">0</span></i></button>
+            <button type="button" class="votes w3-button w3-theme-d2 w3-margin-bottom"  onclick="onButtonClick()"><i class="fa fa-comment fa-sm"></i> Comment</button> 
+            </div>        
+        </footer>
+        {% endfor %}  
+    <input class="hide" type="text" id="textInput" value="..." />
+</div>
+
+<h1>Hi, {{ current_user.username }}!</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.post.label }}<br>
+            {{ form.post(cols=32, rows=4) }}<br>
+            {% for error in form.post.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    {% for post in posts %}
+    <p>
+    {{ post.author.username }} says: <b>{{ post.body }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}
+        
+        </div>
+   
+    
